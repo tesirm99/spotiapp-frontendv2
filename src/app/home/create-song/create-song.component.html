@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Create song
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="formValidation">
+    <div class="formContainer">
+      <form class="form" [formGroup]="formValidation" (submit)="insertarCancion()">
+        <ion-item>
+          <ion-label>Title:</ion-label>
+          <ion-input type="text" formControlName="name" [(ngModel)]="song.name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Artist:</ion-label>
+          <ion-input type="text" formControlName="artist" [(ngModel)]="song.artist"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Album:</ion-label>
+          <ion-input type="text" formControlName="album" [(ngModel)]="song.album"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Release date:</ion-label>
+          <ion-input id="date" type="date" formControlName="releaseDate" [(ngModel)]="song.releaseDate"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Genre:</ion-label>
+          <ion-input type="text" formControlName="genre" [(ngModel)]="song.genre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Duration:</ion-label>
+          <ion-input type="number" formControlName="duration" [(ngModel)]="song.duration"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>URL:</ion-label>
+          <ion-input type="text" formControlName="href" [(ngModel)]="song.href"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Image:</ion-label>
+          <ion-input type="text" formControlName="image" [(ngModel)]="song.image"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Popularity:</ion-label>
+          <ion-input type="number" formControlName="popularity" [(ngModel)]="song.popularity"></ion-input>
+        </ion-item>
+        <ion-buttons>
+          <ion-button id="submitBtn" type="submit" [disabled]="!formValidation.valid">Insert song</ion-button>
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+  
+      </form>
+  
+    </div>
+  </div>
+</ion-content>

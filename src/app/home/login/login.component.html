@@ -1,0 +1,58 @@
+<main class="mainCont">
+  <h1>Log into SpotiApp!</h1>
+
+  <div *ngIf="formValidation" class="formContainer">
+
+    <form class="form" [formGroup]="formValidation" (ngSubmit)="login(formValidation.value)"> 
+      <ion-item>
+        <ion-label class="label-title">Enter your data</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Email: </ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+      <div> 
+        <ng-container *ngFor="let validation of formValidationMessages.email">
+          <div class="error-message"
+            *ngIf="formValidation?.get('email')?.hasError(validation.type) && (formValidation.get('email')?.dirty || formValidation.get('email')?.touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label position="floating" color="primary">Password: </ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <div> 
+        <ng-container *ngFor="let validation of formValidationMessages.password">
+          <div class="error-message"
+            *ngIf="formValidation.get('password')?.hasError(validation.type) && (formValidation.get('password')?.dirty || formValidation.get('password')?.touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-buttons slot="end" *ngIf="isInLogin">
+        <ion-button fill="solid" type="submit" [disabled]="!formValidation.valid">Login</ion-button>
+        <ion-button fill="solid" (click)="goToRegister()">I dont have an account</ion-button>
+        <ion-button (click)="cancel()">Cancel</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="!isInLogin">
+        <ion-button fill="solid" type="submit" [disabled]="!formValidation.valid">Signup</ion-button>
+        <ion-button fill="solid" (click)="goToRegister()">I already have an account</ion-button>
+        <ion-button (click)="cancel()">Cancel</ion-button>
+      </ion-buttons>
+      <!--<div class="div-button-login" *ngIf="isInLogin"> 
+        <ion-button type="submit" [disabled]="!formValidation.valid">Login</ion-button>
+        <ion-button (click)="goToRegister()">I dont have an account</ion-button>
+      </div>
+      <div class="div-button-login" *ngIf="!isInLogin"> 
+        <ion-button type="submit" [disabled]="!formValidation.valid">Signup</ion-button>
+        <ion-button (click)="goToRegister()">I already have an account</ion-button>
+      </div>-->
+      <div class="div-label-error"> 
+        <ion-label class="error-message">{{ errorMessage }}</ion-label>
+      </div>
+    </form>
+  
+  </div>
+</main>

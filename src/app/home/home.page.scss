@@ -25,3 +25,28 @@
 #container a {
   text-decoration: none;
 }
+
+.filterForm {
+  display: grid;
+  grid-auto-flow: column;
+  place-items: center;
+  gap: 1rem;
+}
+
+.filterContainer {
+  display: grid;
+  place-items: center;
+  margin: 1rem;
+}
+
+.filterItem {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+}
+
+.songContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  width: 100%;
+}

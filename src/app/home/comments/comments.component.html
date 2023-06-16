@@ -1,0 +1,39 @@
+<section>
+  <article class="addCmtArt">
+    <h2>Add Comment</h2>
+    <ion-item>
+      <ion-label position="floating">Author</ion-label>
+      <ion-input [(ngModel)]="author" type="text" aria-label="Autor"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Comment</ion-label>
+      <ion-textarea [(ngModel)]="commentText" aria-label="Comment"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Stars</ion-label>
+      <ion-range [(ngModel)]="stars" aria-label="Range with ticks" [ticks]="true" [snaps]="true" [min]="0"
+        [max]="5"></ion-range>
+    </ion-item>
+    <ion-button (click)="sendComment()">Add</ion-button>
+  </article>
+  <article style="width:500px;">
+    <h2>Comments</h2>
+    <ion-list>
+      <ion-item *ngFor="let comment of comments">
+        <ion-card style="width:100%;">
+          <ion-header>
+            <ion-card-subtitle>Author: {{comment.author}}</ion-card-subtitle>
+            <ion-card-title>{{comment.commentText}}</ion-card-title>
+          </ion-header>
+          <ion-card-content>
+            {{comment.stars}} stars
+          </ion-card-content>
+          <ion-button *ngIf="!hideDelete" color="danger" (click)="handleDeleteAlert(comment._id!)">
+            Delete
+          </ion-button>
+        </ion-card>
+        
+      </ion-item>
+    </ion-list>
+  </article>
+</section>

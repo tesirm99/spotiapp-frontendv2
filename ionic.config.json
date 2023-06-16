@@ -1,0 +1,7 @@
+{
+  "name": "spotiapp-frontend-v2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

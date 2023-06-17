@@ -66,6 +66,7 @@ export class LoginComponent  implements OnInit {
       if (this.isLogged) {
         this.confirm();
       } else {
+        this.cancel();
         this.errorMessage = "Usuario o contraseña incorrectos";
       }  
     } else {
@@ -73,9 +74,10 @@ export class LoginComponent  implements OnInit {
       let register = await this.authService.register(value.email, value.password);
       console.log(register);
       if (register) {
-        this.router.navigate(['/tabs/tab1']);
+        this.confirm();
       } else {
         this.errorMessage = "Algo ha salido mal durante el registro";
+        this.cancel();
       }
     }
 

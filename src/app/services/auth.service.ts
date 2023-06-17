@@ -18,7 +18,9 @@ export class AuthService {
   }
 
   async login(email: string, password: string): Promise<boolean> {
-    let res = await fetch('http://localhost:3000/users/signin', {
+    
+    try{
+      let res = await fetch('http://localhost:3000/users/signin', {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -43,8 +45,12 @@ export class AuthService {
     } else {
       return false;
     }
+    
+    } catch(error: any) {
+      console.log(error);
+      return false;
+    }
   }
-
 
   async register(email: string, password: string): Promise<boolean> {
     let res = await fetch('http://localhost:3000/users/signup', {

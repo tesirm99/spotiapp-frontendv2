@@ -11,40 +11,40 @@
       <form class="form" [formGroup]="formValidation" (submit)="insertarCancion()">
         <ion-item>
           <ion-label>Title:</ion-label>
-          <ion-input type="text" formControlName="name" [(ngModel)]="song.name"></ion-input>
+          <ion-input id="titleInp" type="text" formControlName="name" [(ngModel)]="song.name"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Artist:</ion-label>
-          <ion-input type="text" formControlName="artist" [(ngModel)]="song.artist"></ion-input>
+          <ion-input id="artistInp" type="text" formControlName="artist" [(ngModel)]="song.artist"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Album:</ion-label>
-          <ion-input type="text" formControlName="album" [(ngModel)]="song.album"></ion-input>
+          <ion-input id="albumInp" type="text" formControlName="album" [(ngModel)]="song.album"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Release date:</ion-label>
-          <ion-input id="date" type="date" formControlName="releaseDate" [(ngModel)]="song.releaseDate"></ion-input>
+          <ion-input id="dateInp" type="date" formControlName="releaseDate" [(ngModel)]="song.releaseDate"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Genre:</ion-label>
-          <ion-input type="text" formControlName="genre" [(ngModel)]="song.genre"></ion-input>
+          <ion-input id="genreInp" type="text" formControlName="genre" [(ngModel)]="song.genre"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Duration:</ion-label>
-          <ion-input type="number" formControlName="duration" [(ngModel)]="song.duration"></ion-input>
+          <ion-input id="durationInp" type="number" formControlName="duration" [(ngModel)]="song.duration"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>URL:</ion-label>
-          <ion-input type="text" formControlName="href" [(ngModel)]="song.href"></ion-input>
+          <ion-input id="urlInp" type="text" formControlName="href" [(ngModel)]="song.href"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Image:</ion-label>
-          <ion-input type="text" formControlName="image" [(ngModel)]="song.image"></ion-input>
+          <ion-input id="imgInp" type="text" formControlName="image" [(ngModel)]="song.image"></ion-input>
           <ion-button (click)="takePicture()">Take a photo</ion-button>
         </ion-item>
         <ion-item>
           <ion-label>Popularity:</ion-label>
-          <ion-input type="number" formControlName="popularity" [(ngModel)]="song.popularity"></ion-input>
+          <ion-input id="popInp" type="number" formControlName="popularity" [(ngModel)]="song.popularity"></ion-input>
         </ion-item>
         <ion-buttons>
           <ion-button id="submitBtn" type="submit" [disabled]="!formValidation.valid">Insert song</ion-button>

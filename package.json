@@ -31,6 +31,7 @@
     "@capacitor/status-bar": "5.0.4",
     "@ionic/angular": "^7.0.0",
     "@ionic/pwa-elements": "^3.1.1",
+    "cypress": "^12.14.0",
     "firebase": "^9.22.2",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",

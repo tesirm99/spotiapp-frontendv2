@@ -3,25 +3,9 @@ name: Build
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
-  tests-front:
-    runs-on: ubuntu-22.04
-    container: cypress/browsers:node16.16.0-chrome107-ff107-edge
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          build: npm run build
-          start: npm run start
-          browser: chrome
-        continue-on-error: true 
 
   coverage-linting:
     name: Coverage & Linting
@@ -37,20 +21,24 @@ jobs:
 
       - name: Install Ionic
         run: npm install -g @ionic/cli
+
       - name: Install dependencies
         run: npm install
+
       - name: Unit tests
         uses: coactions/setup-xvfb@v1
         with:
           run: npm run test:prod
         continue-on-error: true
+
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: coverage/cobertura.coverage.xml
+          filename: coverage/cobertura-coverage.xml
           badge: true
           format: 'markdown'
           output: 'both'
+        continue-on-error: true
       - name: Add Coverage PR Comment
         uses: marocchino/sticky-pull-request-comment@v2
         if: github.event_name == 'pull_request'
@@ -70,6 +58,26 @@ jobs:
           report-json: "./coverage/eslint-result.json"
 
 
+
+  tests-front:
+    runs-on: ubuntu-22.04
+    container: cypress/browsers:node16.16.0-chrome107-ff107-edge
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm run start
+          browser: chrome
+        continue-on-error: true 
+
+  
   build-and-push-front:
     runs-on: ubuntu-latest
     steps:

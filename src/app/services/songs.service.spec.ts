@@ -11,7 +11,7 @@ describe('SongsService', () => {
 
   beforeAll(() => {
     auth = TestBed.inject(AuthService);
-    auth.login('tesi@gmail.com', '123456');
+    auth.login('tesi2@gmail.com', '123456');
   });
 
   beforeEach(() => {

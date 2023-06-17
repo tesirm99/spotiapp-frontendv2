@@ -51,7 +51,9 @@
           </ion-row>
         </ion-grid>
       </ion-card-content>
+      <ion-button *ngIf="isLoggedIn" (click)="showEditSong()" style="margin-left:20px;margin-bottom:20px;">Edit</ion-button>
       <ion-button *ngIf="isLoggedIn" (click)="handleDeleteAlert(song._id!)" color="danger" style="margin-left:20px;margin-bottom:20px;">Delete</ion-button>
+      
     </ion-card>
   </div>
   <div *ngIf="song">

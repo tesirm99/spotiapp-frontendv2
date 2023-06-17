@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { SongDetailComponent } from './song-detail/song-detail.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CreateSongComponent } from './create-song/create-song.component';
+import { EditSongComponent } from './edit-song/edit-song.component';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { CreateSongComponent } from './create-song/create-song.component';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, LoginComponent, SongDetailComponent, CommentsComponent, CreateSongComponent],
+  declarations: [HomePage, LoginComponent, SongDetailComponent, CommentsComponent, CreateSongComponent, EditSongComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}

@@ -5,6 +5,7 @@ import { Song } from 'src/app/interfaces/song.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { SongsService } from 'src/app/services/songs.service';
 import { LoginComponent } from '../login/login.component';
+import { EditSongComponent } from '../edit-song/edit-song.component';
 
 @Component({
   selector: 'app-song-detail',
@@ -67,6 +68,22 @@ export class SongDetailComponent  implements OnInit {
 
     const { data, role } = await modal.onWillDismiss();
 
+  }
+
+  async showEditSong(){
+    const modal = await this.modalCtrl.create({
+      component: EditSongComponent,
+      componentProps: {
+        song: this.song
+      }
+    });
+    await modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if(role === 'confirm') {
+      window.location.reload();
+    }
   }
 
   logout(){

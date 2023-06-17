@@ -51,6 +51,7 @@ export class CommentsComponent  implements OnInit {
         this.commentText = undefined;
         this.stars = 0;
         await this.presentToast('bottom', 'Comment added successfully');
+        window.location.reload();
       } else {
         await this.presentToast('bottom', 'Error adding comment');
       }

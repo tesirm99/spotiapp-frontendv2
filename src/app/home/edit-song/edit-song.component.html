@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Edit {{song!.name}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="song !== undefined">
+    <div class="formContainer">
+      <form class="form" (submit)="updateSong()">
+        <ion-item>
+          <ion-label>Title:</ion-label>
+          <ion-input id="titleInp" type="text" name="title" [(ngModel)]="song.name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Artist:</ion-label>
+          <ion-input id="artistInp" type="text" name="artist" [(ngModel)]="song.artist"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Album:</ion-label>
+          <ion-input id="albumInp" type="text" name="album" [(ngModel)]="song.album"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Release date:</ion-label>
+          <ion-input id="dateInp" type="text" name="relDate" [(ngModel)]="song.releaseDate"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Genre:</ion-label>
+          <ion-input id="genreInp" type="text" name="genre" [(ngModel)]="song.genre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Duration:</ion-label>
+          <ion-input id="durationInp" type="number" name="duration" [(ngModel)]="song.duration"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>URL:</ion-label>
+          <ion-input id="urlInp" type="text" name="url" [(ngModel)]="song.href"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Image:</ion-label>
+          <ion-input id="imgInp" type="text" name="img" [(ngModel)]="song.image"></ion-input>
+          <ion-button (click)="takePicture()">Take a photo</ion-button>
+        </ion-item>
+        <ion-buttons>
+          <ion-button id="submitBtn" type="submit">Edit song</ion-button>
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+      </form>
+    </div>
+  </div>
+</ion-content>

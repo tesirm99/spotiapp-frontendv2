@@ -67,6 +67,7 @@ describe('SongDetailComponent', () => {
   });
 
   it('should create', () => {
+    spyOn(authService, 'isLogged').and.returnValue(of(true));
     expect(component).toBeTruthy();
   });
 

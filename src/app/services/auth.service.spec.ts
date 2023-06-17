@@ -25,7 +25,7 @@ describe('AuthService', () => {
   });
 
   it('should login', async () => {
-    const user = await service.login('tesi@gmail.com', '123456');
+    const user = await service.login('tesi2@gmail.com', '123456');
     console.log(user);
     
     expect(user).toBeTrue();

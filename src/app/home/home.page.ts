@@ -23,8 +23,10 @@ export class HomePage {
   textoPatata: string = 'Search for a song!'
   isLogged: boolean = false;
   songs: Song[] = [];
+  spotifySongs: Song[] = [];
   selectedSongs = new Map<Song, Boolean>();
   sentSongs: number = 0;
+  showSpotify: boolean = false;
   
   constructor(private songService: SongsService, private authService: AuthService, private modalCtrl: ModalController, private toastCtrl: ToastController, private router: Router) {}
 
@@ -49,7 +51,7 @@ export class HomePage {
   }
 
   logout(){
-
+    this.authService.logout();
   }
 
   resetTerminoBusqueda() {
@@ -127,7 +129,7 @@ export class HomePage {
     this.songService.searchSongFromSpotify(this.terminoBusqueda).subscribe(
       (data: any) => {
         console.log(data.tracks.items);
-        
+        this.spotifySongs = [];
         data.tracks.items.forEach((element: any) => {
           let song: Song = {
             name: element.name,
@@ -136,16 +138,19 @@ export class HomePage {
             releaseDate: element.album.release_date,
             duration: element.duration_ms / (1000 * 60),
             href: element.external_urls.spotify,
-            image: element.album.images[2].url,
+            image: element.album.images[0].url,
             genre: "Genre not available",
             popularity: element.popularity,
             geolocation: [0, 0],
             comments: []
           }
-          this.songs.push(song);
+          this.spotifySongs.push(song);
         });
-        console.log(this.songs);
-        console.log(this.songs[0].image);
+        this.showSpotify = true;
+        console.log(this.spotifySongs);
+        console.log(this.showSpotify);
+        
+        
       },
       (error: any) => {
         console.log(error);
@@ -158,16 +163,19 @@ export class HomePage {
   }
 
   async addSelectedSongs() {
+    console.log(this.selectedSongs);
+    
     const toast = await this.toastCtrl.create({
       message: 'Song(s) added successfully!',
       duration: 2000
     });
-    const selectedSongs = this.songs.filter(song => this.selectedSongs!.get(song));
+    const selectedSongs = this.spotifySongs.filter(song => this.selectedSongs!.get(song));
+    console.log(selectedSongs);
     selectedSongs.forEach(song => {
       console.log(song);
       
       this.songService.createSong(song).then(
-        (data: any) => {
+        async (data: any) => {
           console.log(data);
           this.sentSongs++;
           if(this.sentSongs == selectedSongs.length) {
@@ -175,16 +183,16 @@ export class HomePage {
             this.sentSongs = 0;
             this.songs = [];
             toast.present();
-            this.router.navigate(['/tabs/tab1']);
+            this.showSpotify = false;
+            this.songs = await this.songService.getSongs();
           }
-        })
-        .catch(
-        (error: any) => {
-          toast.message = 'Error adding songs!';
-          toast.present();
-          console.log(error);
-        }
-      );
+      })
+      .catch(
+      (error: any) => {
+        toast.message = 'Error adding songs!';
+        toast.present();
+        console.log(error);
+      });
     });
 
   }
@@ -205,5 +213,26 @@ export class HomePage {
     await modal.present();
 
     const { data, role } = await modal.onWillDismiss();
+  }
+
+  async resetSearch() {
+    this.songs = await this.songService.getSongs();
+    this.showSpotify = false;
+  }
+
+  getSongImage(song: Song): string {
+    
+    
+    if (song.image.startsWith('http')) {
+      // Si la imagen es una URL
+      console.log(song.image);
+      
+      return song.image;
+    } else {
+      // Si la imagen es una cadena Base64
+      console.log(song.image);
+      
+      return "data:image/jpeg;base64," + song.image;
+    }
   }
 }

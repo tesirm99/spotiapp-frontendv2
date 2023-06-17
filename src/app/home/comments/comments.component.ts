@@ -24,8 +24,9 @@ export class CommentsComponent  implements OnInit {
   ngOnInit() {
     this.getComments();
     this.authService.isLogged().subscribe(loggedIn => {
-      this.hideDelete = loggedIn;
-      // Realiza cualquier acción adicional que necesites al cambiar el estado de autenticación
+      this.hideDelete = !loggedIn;
+
+      console.log(this.hideDelete);      
     });
   }
 

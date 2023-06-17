@@ -16,9 +16,10 @@
     </ion-item>
     <ion-button (click)="sendComment()">Add</ion-button>
   </article>
-  <article style="width:500px;">
+  <article style="width:500px;" *ngIf="this.comments">
     <h2>Comments</h2>
-    <ion-list>
+    <h3 *ngIf="this.comments.length === 0"> There are no comments yet</h3>
+    <ion-list *ngIf="this.comments.length > 0">
       <ion-item *ngFor="let comment of comments">
         <ion-card style="width:100%;">
           <ion-header>
@@ -32,7 +33,6 @@
             Delete
           </ion-button>
         </ion-card>
-        
       </ion-item>
     </ion-list>
   </article>

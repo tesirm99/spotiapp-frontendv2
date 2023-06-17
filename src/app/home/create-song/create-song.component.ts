@@ -100,7 +100,7 @@ export class CreateSongComponent  implements OnInit {
         Validators.required,
       ])),
       image: new FormControl('', Validators.compose([
-        Validators.required,
+        
       ])),
       href: new FormControl('', Validators.compose([
         Validators.required,
@@ -133,14 +133,13 @@ export class CreateSongComponent  implements OnInit {
     });
 
     if(image && image.base64String)  {
-      this.photo = image.base64String;
+      this.photo = "data:image/jpeg;base64," + image.base64String;
     }
-
     const position = await this.geolocationService.getCurrentPosition();
     this.latitude = position.coords.latitude;
     this.longitude = position.coords.longitude;
     this.accuracy = position.coords.accuracy;
-
+    
   }
 
   async cancel() {

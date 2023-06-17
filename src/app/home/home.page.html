@@ -40,18 +40,16 @@
         <label>Use Spotify</label>
       </div>
       <div class="filterItem">
-        <input id="searchInput" type="text" [(ngModel)]="terminoBusqueda" *ngIf="tipoBusqueda !== 'fecha'" placeholder="Search"/>
-        <input  type="date" [(ngModel)]="terminoBusqueda" *ngIf="tipoBusqueda === 'fecha'"/>
-        <button id="searchBtn" (click)="buscar()">Search</button>
+        <ion-input id="searchInput" type="text" [(ngModel)]="terminoBusqueda" *ngIf="tipoBusqueda !== 'fecha'" placeholder="Search"/>
+        <ion-input  type="date" [(ngModel)]="terminoBusqueda" *ngIf="tipoBusqueda === 'fecha'"/>
+        <ion-button id="searchBtn" (click)="buscar()">Search</ion-button>
+        <ion-button id="resetBtn" (click)="resetSearch()">Reset</ion-button>
       </div>
     </div>
     <div>
-      <div *ngIf="this.songs.length > 0">
-        <div *ngIf="tipoBusqueda == 'spotify'">
-          <ion-button [disabled]="!areSongsSelected()" (click)="addSelectedSongs()">Add selected songs</ion-button>
-        </div>
+      <div *ngIf="!this.showSpotify">
         <div class="songContainer">
-          <ion-card *ngFor="let song of this.songs">
+          <ion-card *ngFor="let song of this.songs" style="max-width: 210px; max-height: 375px;">
             <ion-img [src]="song.image"></ion-img>
             <ion-card-header>
               <ion-card-title>{{ song.name }}</ion-card-title>
@@ -60,17 +58,26 @@
             </ion-card-header>
           </ion-card>
         </div>
-        <!--<ion-list>
-          <ion-item *ngFor="let song of this.songs">
-            <img src="{{song.image}}" alt="Could not load image"/>
-            <ion-label>
-              <h2>{{ song.name }}</h2>
-              <p>{{ song.artist }}</p>
-            </ion-label>
-            <input *ngIf="tipoBusqueda == 'spotify'" type="checkbox" [checked]="selectedSongs!.get(song)" (change)="selectSong(song)">
-            <ion-button *ngIf="tipoBusqueda != 'spotify'" (click)="goToSongDetail(song._id!)">View</ion-button>
-          </ion-item>
-        </ion-list>-->
+      </div>
+      <div *ngIf="this.showSpotify">
+        <div *ngIf="tipoBusqueda == 'spotify'">
+          <ion-button [disabled]="!areSongsSelected()" (click)="addSelectedSongs()">Add selected songs</ion-button>
+        </div>
+        <div class="songContainer">
+          <ion-card *ngFor="let song of this.spotifySongs" style="max-width: 210px; max-height: 375px;">
+            <img src="song.image"/>
+            <ion-card-header>
+              <ion-card-title>{{ song.name }}</ion-card-title>
+              <ion-card-subtitle>{{ song.artist }}</ion-card-subtitle>
+            </ion-card-header>
+            <div style="display:grid;place-items:center;">
+              <div style="padding:10px; margin:10px; vertical-align: middle;">
+                <label>Add song</label>
+                <input *ngIf="tipoBusqueda == 'spotify'" type="checkbox" [checked]="selectedSongs!.get(song)" (change)="selectSong(song)"/>
+              </div>
+            </div>
+          </ion-card>
+        </div>
       </div>
       <div *ngIf="this.songs.length < 1">
         <h1>There are no songs to display</h1>

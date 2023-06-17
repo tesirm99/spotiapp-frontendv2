@@ -1,0 +1,26 @@
+.addCmtArt {
+    
+    width: 500px;
+}
+
+section {
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.star-rating {
+    display: inline-block;
+  }
+  
+  .star {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: gray;
+    margin-right: 2px;
+  }
+  
+  .star.full {
+    background-color: gold;
+  }

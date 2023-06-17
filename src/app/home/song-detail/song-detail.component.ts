@@ -70,6 +70,6 @@ export class SongDetailComponent  implements OnInit {
   }
 
   logout(){
-
+    this.authService.logout();
   }
 }

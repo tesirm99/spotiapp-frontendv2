@@ -88,20 +88,9 @@ export class AuthService {
   }
 
   async getUser(): Promise<string> {
-    let res = await fetch('http://localhost:3000/users/getById/' + localStorage.getItem('id'), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token')!
-      },
-    });
-
-    if(res.status == 200) {
-      let user = await res.text();
-      return user;
-    } else {
-      return "jane@doe.com";
-    }
+    let userId = localStorage.getItem('id');
+    
+    return userId ? userId : 'Anonymous';
 
   }
 }

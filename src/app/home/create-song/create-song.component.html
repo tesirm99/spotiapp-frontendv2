@@ -40,6 +40,7 @@
         <ion-item>
           <ion-label>Image:</ion-label>
           <ion-input type="text" formControlName="image" [(ngModel)]="song.image"></ion-input>
+          <ion-button (click)="takePicture()">Take a photo</ion-button>
         </ion-item>
         <ion-item>
           <ion-label>Popularity:</ion-label>

@@ -41,6 +41,8 @@ export class SongsService {
     song.geolocation = [pos.coords.latitude, pos.coords.longitude];
     song.comments = [];
 
+    console.log(song);
+    
     let res = await fetch(this.songAPIURL + '/newsong', {
       method: 'POST',
       body: JSON.stringify(song),
@@ -104,8 +106,7 @@ export class SongsService {
       method: 'POST',
       body: JSON.stringify(comment),
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
+        'Content-Type': 'application/json'
       }
     });
 

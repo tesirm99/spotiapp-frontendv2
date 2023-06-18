@@ -37,7 +37,7 @@ export class SongDetailComponent  implements OnInit {
   handleDeleteAlert(songId: string) {
     this.alertController.create({
       header: 'Confirm delete',
-      message: 'Are you sure you want to delete this comment?',
+      message: 'Are you sure you want to delete this song?',
       buttons: [
         {
           text: 'Cancel',

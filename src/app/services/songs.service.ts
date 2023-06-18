@@ -37,6 +37,8 @@ export class SongsService {
 
   async createSong(song: any) {
     
+    if(localStorage.getItem('token') == null) throw new Error('No token found');
+
     let pos = await this.geoService.getCurrentPosition();
     song.geolocation = [pos.coords.latitude, pos.coords.longitude];
     song.comments = [];
@@ -55,6 +57,8 @@ export class SongsService {
   }
 
   async updateSong(song: any) {
+    if(localStorage.getItem('token') == null) throw new Error('No token found');
+
     let res = await fetch(this.songAPIURL + '/' + song._id, {
       method: 'PUT',
       body: JSON.stringify(song),
@@ -67,6 +71,8 @@ export class SongsService {
   }
 
   async deleteSong(id: string) {
+    if(localStorage.getItem('token') == null) throw new Error('No token found');
+
     let res = await fetch(this.songAPIURL + '/' + id, {
       method: 'DELETE',
       headers: {
@@ -78,7 +84,15 @@ export class SongsService {
   }
 
   searchSongFromSpotify(name: string): Observable<Song[]> {
-    return this.http.get<Song[]>(this.songAPIURL + '/fetchSongsFromSpotify/' + name, { headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') } });
+    if(localStorage.getItem('token') == null) throw new Error('No token found');
+
+    return this.http.get<Song[]>(this.songAPIURL + '/fetchSongsFromSpotify/' + name, 
+    { 
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ' + localStorage.getItem('token') 
+      } 
+    });
   }
 
   searchSongByName(name: string): Observable<Song[]> {
@@ -94,13 +108,10 @@ export class SongsService {
   }
 
   async commentToSong(comment: Comment, songId: string) {
-    
     let pos = await this.geoService.getCurrentPosition();
-    console.log(pos);
     
     comment.geolocation = [pos.coords.latitude, pos.coords.longitude];
-    comment.authorId = localStorage.getItem('id')!;
-    console.log(songId);
+    comment.authorId = localStorage.getItem('id') || 'Anonymous';
     
     let res = await fetch(this.songAPIURL + '/' + songId + '/comments', {
       method: 'POST',
@@ -122,12 +133,13 @@ export class SongsService {
         'Content-Type': 'application/json'
       }
     });
-    console.log(res);
     
     return await res.json();
   }
 
   async deleteComment(songId: string, commentId: string) {
+    if(localStorage.getItem('token') == null) throw new Error('No token found');
+
     let res = await fetch(this.songAPIURL + '/' + songId + '/comments/' + commentId, {
       method: 'DELETE',
       headers: {

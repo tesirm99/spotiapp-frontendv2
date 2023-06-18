@@ -112,8 +112,6 @@ export class CreateSongComponent  implements OnInit {
   }
 
   async insertarCancion() {
-    // Realiza una solicitud POST a la API para insertar la canción
-    console.log('Insertar canción:', this.song, this.formValidation);
 
     if(this.photo != undefined) {
       this.song.image = this.photo.toString();
@@ -121,8 +119,11 @@ export class CreateSongComponent  implements OnInit {
 
     let res = await this.songService.createSong(this.song);
 
-    console.log('Insertar canción:', res);
-    this.confirm();
+    if(res) {
+      this.confirm();
+    } else {
+      this.cancel();
+    }
   }
 
   async takePicture() {

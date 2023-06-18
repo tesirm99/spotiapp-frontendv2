@@ -17,14 +17,14 @@ describe('login', () => {
     cy.get('.buttons-last-slot > .md');
   })
 
-  /*it('login incorrect - bad email', () => {
+  it('login incorrect - bad email', () => {
     cy.visit('http://localhost:8100/home');
     cy.get('.buttons-last-slot > .md').click();
     cy.get('#emailInp').type('tesi2gmail.com');
     cy.get('#passInp').type('123456787');
     cy.get('[type="submit"]').should('be.disabled');
     
-  });*/
+  });
 
 })
 
@@ -33,13 +33,13 @@ describe('register', () => {
     cy.visit('http://localhost:8100/home');
     cy.get('.buttons-last-slot > .md').click();
     cy.get('#goToRegister').click();
-    cy.get('#emailInp').type('cypres33s@test.com');
+    cy.get('#emailInp').type('cypres3333s@test.com');
     cy.get('#passInp').type('123456');
     cy.get('[type="submit"]').click();
     cy.get('.buttons-last-slot > :nth-child(2)').click();
   });
 
-  /*it('register incorrect - bad email', () => {
+  it('register incorrect - bad email', () => {
     cy.visit('http://localhost:8100/home');
     cy.get('.buttons-last-slot > .md').click();
     cy.get('.sc-ion-buttons-md-h > :nth-child(2)').click();    
@@ -64,7 +64,7 @@ describe('register', () => {
     cy.get('#emailInp').type('cypresstest');
     cy.get('#passInp').type('123');
     cy.get('[type="submit"]').should('be.disabled');
-  });*/
+  });
 
 });
 

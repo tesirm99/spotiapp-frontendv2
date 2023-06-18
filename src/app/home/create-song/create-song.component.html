@@ -46,10 +46,12 @@
           <ion-label>Popularity:</ion-label>
           <ion-input id="popInp" type="number" formControlName="popularity" [(ngModel)]="song.popularity"></ion-input>
         </ion-item>
-        <ion-buttons>
-          <ion-button id="submitBtn" type="submit" [disabled]="!formValidation.valid">Insert song</ion-button>
-          <ion-button (click)="cancel()">Cancel</ion-button>
-        </ion-buttons>
+        <div style="display:grid;place-items:center;">
+          <div>
+            <ion-button id="submitBtn" type="submit" [disabled]="!formValidation.valid">Insert song</ion-button>
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </div>
+        </div>
   
       </form>
   

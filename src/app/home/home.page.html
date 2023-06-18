@@ -2,7 +2,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      SpotiApp (PONER UN LOGO)
+      SpotiApp
     </ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf="isLoggedIn" (click)="showAddSong()">
@@ -20,7 +20,6 @@
 </ion-header>
 
 <ion-content>
-
   <div class="filterContainer">
     <div class="filterForm">
       <div class="filterItem">
@@ -70,12 +69,6 @@
               <ion-card-title>{{ song.name }}</ion-card-title>
               <ion-card-subtitle>{{ song.artist }}</ion-card-subtitle>
             </ion-card-header>
-           <!-- <div style="display:grid;place-items:center;">
-              <div style="padding:10px; margin:10px; vertical-align: middle;">
-                <input *ngIf="tipoBusqueda == 'spotify'" id="addsongcb" type="checkbox" [checked]="selectedSongs!.get(song)" (change)="selectSong(song)"/>
-                <label style="padding-right:5px;" for="addsongcb">Add song</label>
-              </div>
-            </div>-->
           </ion-card>
         </div>
       </div>

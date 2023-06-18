@@ -13,6 +13,7 @@ export class LoginComponent  implements OnInit {
 
   formValidation: FormGroup | undefined; 
   errorMessage: string = ''; 
+  headermsg: string = 'Log in to';
 
   formValidationMessages = { 
     'email': [
@@ -31,12 +32,10 @@ export class LoginComponent  implements OnInit {
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router, private modalCtrl: ModalController, private toastCtrl: ToastController) {}
 
   ngOnInit() {
-    //getUserdata
     this.userData.name = "test";
 
     this.authService.isLogged().subscribe(loggedIn => {
       this.isLogged = loggedIn;
-      // Realiza cualquier acción adicional que necesites al cambiar el estado de autenticación
     });
 
     this.formValidation = this.formBuilder.group({
@@ -58,11 +57,8 @@ export class LoginComponent  implements OnInit {
   }
 
   async login(value: { email: string; password: string; }) {
-
     if(this.isInLogin){
-      console.log("login");
       this.isLogged = await this.authService.login(value.email, value.password);
-      console.log(this.isLogged);
       if (this.isLogged) {
         this.confirm();
       } else {
@@ -70,9 +66,7 @@ export class LoginComponent  implements OnInit {
         this.errorMessage = "Usuario o contraseña incorrectos";
       }  
     } else {
-      console.log("register");
       let register = await this.authService.register(value.email, value.password);
-      console.log(register);
       if (register) {
         this.confirm();
       } else {
@@ -80,17 +74,12 @@ export class LoginComponent  implements OnInit {
         this.cancel();
       }
     }
-
-    
-
   }
 
   async register(value: {email: string; password: string; }) {
-
     let registerOk = await this.authService.register(value.email, value.password);
     if (registerOk) {
       this.confirm();
-      // TODO: poner un toast de que se ha registrado correctamente y se ha autologeado
     } else {
       this.errorMessage = "No se ha podido registrar el usuario";
     }
@@ -98,6 +87,11 @@ export class LoginComponent  implements OnInit {
 
   goToRegister() {
     this.isInLogin = !this.isInLogin;
+    if(this.isInLogin){
+      this.headermsg = 'Log in to';
+    }else{
+      this.headermsg = 'Register to';
+    }
   }
 
 

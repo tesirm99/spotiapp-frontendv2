@@ -22,7 +22,6 @@ export class GeolocationService {
         }
       }
     }
-    console.log(position)
     return position;
   }
 }

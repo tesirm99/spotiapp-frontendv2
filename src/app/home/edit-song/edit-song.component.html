@@ -42,10 +42,13 @@
           <ion-input id="imgInp" type="text" name="img" [(ngModel)]="song.image"></ion-input>
           <ion-button (click)="takePicture()">Take a photo</ion-button>
         </ion-item>
-        <ion-buttons>
-          <ion-button id="submitBtn" type="submit">Edit song</ion-button>
-          <ion-button (click)="cancel()">Cancel</ion-button>
-        </ion-buttons>
+        <div style="display:grid;place-items:center;">
+          <div>
+            <ion-button id="submitBtn" type="submit">Edit song</ion-button>
+            <ion-button (click)="cancel()" color="danger">Cancel</ion-button>
+          </div>
+          
+        </div>
       </form>
     </div>
   </div>

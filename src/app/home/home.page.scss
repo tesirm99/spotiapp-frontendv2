@@ -49,5 +49,29 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   width: 90vw;
-  border: 3px solid red;
+}
+
+#addsongcb {
+  display: grid;
+  place-content:center;
+}
+
+
+.selectedSong{
+  border: 3px solid #1DB954;
+}
+
+.noSelectedSong {
+  border: 0px solid #1DB954;
+}
+
+.filterRadius {
+  height: 1rem;
+  width: 1rem;
+  accent-color: #3880ff;
+}
+
+.filterLabel {
+  font-size: 1rem;
+  font-weight: 500;
 }

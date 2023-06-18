@@ -24,20 +24,20 @@
   <div class="filterContainer">
     <div class="filterForm">
       <div class="filterItem">
-        <input type="radio" name="tipoBusqueda" value="nombre" [(ngModel)]="tipoBusqueda" (change)="resetTerminoBusqueda()" />
-        <label>Name</label>
+        <input class="filterRadius" type="radio" name="tipoBusqueda" value="nombre" [(ngModel)]="tipoBusqueda" (change)="resetTerminoBusqueda()" />
+        <label class="filterLabel">Name</label>
       </div>
       <div class="filterItem">
-        <input type="radio" name="tipoBusqueda" value="artista" [(ngModel)]="tipoBusqueda" (change)="resetTerminoBusqueda()" />
-        <label>Artist</label>
+        <input class="filterRadius" type="radio" name="tipoBusqueda" value="artista" [(ngModel)]="tipoBusqueda" (change)="resetTerminoBusqueda()" />
+        <label class="filterLabel">Artist</label>
       </div>
       <div class="filterItem">
-        <input type="radio" name="tipoBusqueda" value="fecha" [(ngModel)]="tipoBusqueda" (change)="resetTerminoBusqueda()" />
-        <label>Date</label>
+        <input class="filterRadius" type="radio" name="tipoBusqueda" value="fecha" [(ngModel)]="tipoBusqueda" (change)="resetTerminoBusqueda()" />
+        <label class="filterLabel">Date</label>
       </div>
       <div *ngIf="this.isLoggedIn" class="filterItem">
-        <input type="radio" name="tipoBusqueda" value="spotify" [(ngModel)]="tipoBusqueda" (change)="resetTerminoBusqueda()" />
-        <label>Use Spotify</label>
+        <input class="filterRadius" type="radio" name="tipoBusqueda" value="spotify" [(ngModel)]="tipoBusqueda" (change)="resetTerminoBusqueda()" />
+        <label class="filterLabel">Use Spotify</label>
       </div>
       <div class="filterItem">
         <ion-input id="searchInput" type="text" [(ngModel)]="terminoBusqueda" *ngIf="tipoBusqueda !== 'fecha'" placeholder="Search"/>
@@ -64,18 +64,18 @@
           <ion-button [disabled]="!areSongsSelected()" (click)="addSelectedSongs()">Add selected songs</ion-button>
         </div>
         <div class="songContainer">
-          <ion-card *ngFor="let song of this.spotifySongs" style="max-width: 210px; max-height: 375px;">
-            <img src="song.image"/>
+          <ion-card *ngFor="let song of this.spotifySongs" style="max-width: 210px; max-height: 375px;" (click)="selectSong(song)" [ngClass]="{'selectedSong': selectedSongs.has(song), 'noSelectedSong': !selectedSongs.has(song)}">
+            <ion-img [src]="song.image" />
             <ion-card-header>
               <ion-card-title>{{ song.name }}</ion-card-title>
               <ion-card-subtitle>{{ song.artist }}</ion-card-subtitle>
             </ion-card-header>
-            <div style="display:grid;place-items:center;">
+           <!-- <div style="display:grid;place-items:center;">
               <div style="padding:10px; margin:10px; vertical-align: middle;">
-                <label>Add song</label>
-                <input *ngIf="tipoBusqueda == 'spotify'" type="checkbox" [checked]="selectedSongs!.get(song)" (change)="selectSong(song)"/>
+                <input *ngIf="tipoBusqueda == 'spotify'" id="addsongcb" type="checkbox" [checked]="selectedSongs!.get(song)" (change)="selectSong(song)"/>
+                <label style="padding-right:5px;" for="addsongcb">Add song</label>
               </div>
-            </div>
+            </div>-->
           </ion-card>
         </div>
       </div>

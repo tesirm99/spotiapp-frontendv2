@@ -38,7 +38,7 @@ jobs:
           badge: true
           format: 'markdown'
           output: 'both'
-        continue-on-error: true
+        
       - name: Add Coverage PR Comment
         uses: marocchino/sticky-pull-request-comment@v2
         if: github.event_name == 'pull_request'

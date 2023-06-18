@@ -1,5 +1,5 @@
 <main class="mainCont">
-  <h1>Log into SpotiApp!</h1>
+  <h1>Log in to SpotiApp!</h1>
 
   <div *ngIf="formValidation" class="formContainer">
 
@@ -31,24 +31,21 @@
           </div>
         </ng-container>
       </div>
-      <ion-buttons slot="end" *ngIf="isInLogin">
-        <ion-button fill="solid" type="submit" [disabled]="!formValidation.valid">Login</ion-button>
-        <ion-button fill="solid" (click)="goToRegister()">I dont have an account</ion-button>
-        <ion-button (click)="cancel()">Cancel</ion-button>
-      </ion-buttons>
-      <ion-buttons slot="end" *ngIf="!isInLogin">
-        <ion-button fill="solid" type="submit" [disabled]="!formValidation.valid">Signup</ion-button>
-        <ion-button fill="solid" (click)="goToRegister()">I already have an account</ion-button>
-        <ion-button (click)="cancel()">Cancel</ion-button>
-      </ion-buttons>
-      <!--<div class="div-button-login" *ngIf="isInLogin"> 
-        <ion-button type="submit" [disabled]="!formValidation.valid">Login</ion-button>
-        <ion-button (click)="goToRegister()">I dont have an account</ion-button>
+      <div style="display: grid; place-items: center; margin-top: 10px;" *ngIf="isInLogin">
+        <div>
+          <ion-button fill="solid" type="submit" [disabled]="!formValidation.valid">Login</ion-button>
+          <ion-button id="goToRegister" fill="solid" (click)="goToRegister()">I dont have an account</ion-button>
+          <ion-button color="danger" (click)="cancel()">Cancel</ion-button>
+        </div>
       </div>
-      <div class="div-button-login" *ngIf="!isInLogin"> 
-        <ion-button type="submit" [disabled]="!formValidation.valid">Signup</ion-button>
-        <ion-button (click)="goToRegister()">I already have an account</ion-button>
-      </div>-->
+      <div style="display: grid; place-items: center; margin-top: 10px;" *ngIf="!isInLogin">
+        <div>
+          <ion-button fill="solid" type="submit" [disabled]="!formValidation.valid">Signup</ion-button>
+          <ion-button fill="solid" (click)="goToRegister()">I already have an account</ion-button>
+          <ion-button color="danger" (click)="cancel()">Cancel</ion-button>
+        </div>
+      </div>
+
       <div class="div-label-error"> 
         <ion-label class="error-message">{{ errorMessage }}</ion-label>
       </div>

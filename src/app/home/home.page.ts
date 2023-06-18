@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { ModalController, ToastButton, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { LoginComponent } from './login/login.component';
 import { Song } from '../interfaces/song.interface';
 import { SongsService } from '../services/songs.service';
 import { Router } from '@angular/router';
 import { CreateSongComponent } from './create-song/create-song.component';
-
 
 @Component({
   selector: 'app-home',
@@ -34,7 +33,6 @@ export class HomePage {
     this.authService.isLogged().subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
       console.log(this.isLoggedIn);
-      // Realiza cualquier acción adicional que necesites al cambiar el estado de autenticación
     });
 
     this.songs = await this.songService.getSongs();
@@ -59,7 +57,6 @@ export class HomePage {
   }
 
   buscar() {
-    // Ejecutar la búsqueda según el tipo seleccionado
     if (this.tipoBusqueda === 'nombre') {
       this.buscarPorNombre();
     } else if (this.tipoBusqueda === 'artista') {
@@ -72,16 +69,9 @@ export class HomePage {
   }
 
   buscarPorNombre() {
-    // Lógica de búsqueda por nombre
-    console.log('Búsqueda por nombre:', this.terminoBusqueda);
     this.songService.searchSongByName(this.terminoBusqueda).subscribe(
       (data: any) => {
-        if(data.length == 0) {
-          this.textoPatata = 'No results found :(';
-        }
-        this.songs = data;
-        
-        console.log(data);
+        this.songs = data;        
       },
       (error: any) => {
         console.log(error);
@@ -90,14 +80,11 @@ export class HomePage {
   }
 
   buscarPorArtista() {
-    // Lógica de búsqueda por artista
-    console.log('Búsqueda por artista:', this.terminoBusqueda);
     this.songService.searchSongByArtist(this.terminoBusqueda).subscribe(
       (data: any) => {
         if(data.length == 0) {
           this.textoPatata = 'No results found :(';
         }
-        console.log(data);
         this.songs = data;
       },
       (error: any) => {
@@ -107,14 +94,11 @@ export class HomePage {
   }
 
   buscarPorFecha() {
-    // Lógica de búsqueda por fecha
-    console.log('Búsqueda por fecha:', this.terminoBusqueda);
     this.songService.searchSongByDate(this.terminoBusqueda).subscribe(
       (data: any) => {
         if(data.length == 0) {
           this.textoPatata = 'No results found :(';
         }
-        console.log(data);
         this.songs = data;
       },
       (error: any) => {
@@ -124,11 +108,8 @@ export class HomePage {
   }
 
   buscarPorSpotify() {
-    // Lógica de búsqueda por fecha
-    console.log('Búsqueda por spotify:', this.terminoBusqueda);
     this.songService.searchSongFromSpotify(this.terminoBusqueda).subscribe(
       (data: any) => {
-        console.log(data.tracks.items);
         this.spotifySongs = [];
         data.tracks.items.forEach((element: any) => {
           let song: Song = {
@@ -147,10 +128,6 @@ export class HomePage {
           this.spotifySongs.push(song);
         });
         this.showSpotify = true;
-        console.log(this.spotifySongs);
-        console.log(this.showSpotify);
-        
-        
       },
       (error: any) => {
         console.log(error);
@@ -159,7 +136,12 @@ export class HomePage {
   }
 
   selectSong(song: Song) {
-    this.selectedSongs!.set(song, !this.selectedSongs!.get(song));
+    if(!this.selectedSongs!.has(song)) {
+      this.selectedSongs!.set(song, !this.selectedSongs!.get(song));
+      
+    } else {
+      this.selectedSongs!.delete(song);
+    }
   }
 
   async addSelectedSongs() {

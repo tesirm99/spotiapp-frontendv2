@@ -107,4 +107,8 @@ export class CommentsComponent  implements OnInit {
 
     await toast.present();
   }
+
+  parseDate(date: string) {
+    return new Date(date).toLocaleDateString();
+  }
 }

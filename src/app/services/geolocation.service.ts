@@ -9,7 +9,19 @@ export class GeolocationService {
   constructor() { }
 
   async getCurrentPosition() {
-    const position = await Geolocation.getCurrentPosition(); 
+    let position;
+    try {
+      position = await Geolocation.getCurrentPosition(); 
+    
+    }catch(error) {
+      position = {
+        coords: {
+          latitude: 0,
+          longitude: 0,
+          accuracy: 0,
+        }
+      }
+    }
     console.log(position)
     return position;
   }

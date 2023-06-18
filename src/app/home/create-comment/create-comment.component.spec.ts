@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { EditSongComponent } from './edit-song.component';
+import { CreateCommentComponent } from './create-comment.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 
-describe('EditSongComponent', () => {
-  let component: EditSongComponent;
-  let fixture: ComponentFixture<EditSongComponent>;
+describe('CreateCommentComponent', () => {
+  let component: CreateCommentComponent;
+  let fixture: ComponentFixture<CreateCommentComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditSongComponent ],
+      declarations: [ CreateCommentComponent ],
       imports: [
         IonicModule.forRoot(),
         HttpClientTestingModule,
@@ -21,7 +21,7 @@ describe('EditSongComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EditSongComponent);
+    fixture = TestBed.createComponent(CreateCommentComponent);
     component = fixture.componentInstance;
     component.song = {
       _id: '1',

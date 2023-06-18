@@ -1,21 +1,5 @@
 <section>
-  <article class="addCmtArt">
-    <h2>Add Comment</h2>
-    <ion-item>
-      <ion-label position="floating">Author</ion-label>
-      <ion-input [(ngModel)]="author" type="text" aria-label="Autor"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Comment</ion-label>
-      <ion-textarea [(ngModel)]="commentText" aria-label="Comment"></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Stars</ion-label>
-      <ion-range [(ngModel)]="stars" aria-label="Range with ticks" [ticks]="true" [snaps]="true" [min]="0"
-        [max]="5"></ion-range>
-    </ion-item>
-    <ion-button (click)="sendComment()">Add</ion-button>
-  </article>
+  
   <article style="width:500px;" *ngIf="this.comments">
     <h2>Comments</h2>
     <h3 *ngIf="this.comments.length === 0"> There are no comments yet</h3>
@@ -27,7 +11,13 @@
             <ion-card-title>{{comment.commentText}}</ion-card-title>
           </ion-header>
           <ion-card-content>
-            {{comment.stars}} stars
+            <app-star-rating [estrellas]="comment.stars"></app-star-rating>
+            <div>
+              <span>{{parseDate(comment.date)}}</span>
+            </div>
+            <div>
+              <span>From [{{comment.geolocation}}]</span>
+            </div>
           </ion-card-content>
           <ion-button *ngIf="!hideDelete" color="danger" (click)="handleDeleteAlert(comment._id!)">
             Delete

@@ -55,6 +55,7 @@
       <ion-button *ngIf="isLoggedIn" (click)="handleDeleteAlert(song._id!)" color="danger" style="margin-left:20px;margin-bottom:20px;">Delete</ion-button>
       
     </ion-card>
+    <ion-button (click)="showNewComment()">New comment</ion-button>
   </div>
   <div *ngIf="song">
     <app-comments [songId]="song._id"></app-comments>

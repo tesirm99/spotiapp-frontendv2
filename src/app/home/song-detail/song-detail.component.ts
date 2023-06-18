@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { Song } from 'src/app/interfaces/song.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { SongsService } from 'src/app/services/songs.service';
 import { LoginComponent } from '../login/login.component';
 import { EditSongComponent } from '../edit-song/edit-song.component';
+import { CreateCommentComponent } from '../create-comment/create-comment.component';
 
 @Component({
   selector: 'app-song-detail',
@@ -17,7 +18,7 @@ export class SongDetailComponent  implements OnInit {
   song: Song | undefined;
   isLoggedIn: boolean = false;
   
-  constructor(private songService: SongsService, private activatedRoute: ActivatedRoute, private authService: AuthService,  private alertController: AlertController, private router: Router, private modalCtrl: ModalController) { 
+  constructor(private songService: SongsService, private activatedRoute: ActivatedRoute, private authService: AuthService,  private alertController: AlertController, private router: Router, private modalCtrl: ModalController, private toastCtrl: ToastController) { 
     this.activatedRoute.params.subscribe(async params => {
       if(params['id'] != undefined){
         this.song = await this.songService.getSongById(params['id']);
@@ -56,7 +57,16 @@ export class SongDetailComponent  implements OnInit {
   async deleteSong(songId: string) {
     let res = await this.songService.deleteSong(songId);
     if (res) {
-      this.router.navigate(['home']);
+      this.router.navigate(['home']).then(async () => {
+        const toast = this.toastCtrl.create({
+          message: 'Song deleted successfully!',
+          duration: 2000
+        });
+        (await toast).present().then(() => {
+          window.location.reload();
+        });
+        
+      });
     }
   }
 
@@ -88,5 +98,23 @@ export class SongDetailComponent  implements OnInit {
 
   logout(){
     this.authService.logout();
+  }
+
+  async showNewComment() {
+    const modal = await this.modalCtrl.create({
+      component: CreateCommentComponent,
+      componentProps: {
+        song: this.song
+      },
+      cssClass: 'createcommentmodal'
+    });
+
+    await modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if(role === 'confirm') {
+      window.location.reload();
+    }
   }
 }

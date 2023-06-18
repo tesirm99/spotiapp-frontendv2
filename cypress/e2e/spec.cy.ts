@@ -32,8 +32,8 @@ describe('register', () => {
   it('register correct', () => {
     cy.visit('http://localhost:8100/home');
     cy.get('.buttons-last-slot > .md').click();
-    cy.get('.sc-ion-buttons-md-h > :nth-child(2)').click();
-    cy.get('#emailInp').type('cypres3s@test.com');
+    cy.get('#goToRegister').click();
+    cy.get('#emailInp').type('cypres33s@test.com');
     cy.get('#passInp').type('123456');
     cy.get('[type="submit"]').click();
     cy.get('.buttons-last-slot > :nth-child(2)').click();
@@ -81,11 +81,11 @@ describe('insert song', () => {
     cy.get('#albumInp').type('test');
     cy.get('#dateInp').type('2023-06-17');
     cy.get('#genreInp').type('test');
-    cy.get('#durationInp').type('test');
+    cy.get('#durationInp').type('2');
     cy.get('#urlInp').type('test');
     cy.get('#imgInp').type('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/312px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg');
     cy.get('[type="submit"]').click();
-    
+    cy.wait(4000);
   });
 
 });

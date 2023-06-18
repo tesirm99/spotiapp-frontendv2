@@ -24,3 +24,12 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.createcommentmodal {
+    align-items: center;
+    justify-content: center; 
+    .modal-wrapper { 
+        --height: 250px; 
+        --width: 50%;   
+    }
+}

@@ -20,7 +20,7 @@ export class AuthService {
   async login(email: string, password: string): Promise<boolean> {
     
     try{
-      let res = await fetch('http://localhost:3000/users/signin', {
+      let res = await fetch('http://35.189.89.211/users/signin', {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   async register(email: string, password: string): Promise<boolean> {
-    let res = await fetch('http://localhost:3000/users/signup', {
+    let res = await fetch('http://35.189.89.211/users/signup', {
       method: 'POST',
       body: JSON.stringify({
         email: email,

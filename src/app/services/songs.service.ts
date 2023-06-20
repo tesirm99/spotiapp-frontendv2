@@ -10,7 +10,7 @@ import { GeolocationService } from './geolocation.service';
 })
 export class SongsService {
 
-  songAPIURL = "http://localhost:3000/songs";
+  songAPIURL = "http://35.189.89.211/songs";
 
   constructor(private http: HttpClient, private geoService: GeolocationService) { }
 

@@ -158,6 +158,7 @@ export class CreateSongComponent  implements OnInit {
       duration: 2000
     });
     (await toast).present();
+    window.location.reload();
     return this.modalCtrl.dismiss("", 'confirm');
   }
 }
